@@ -45,6 +45,7 @@ class I2CLaser
 public:
 	I2CLaser();
 	unsigned short getLaserDistance();
+
 };
 
 #endif// !LaserSupport

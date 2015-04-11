@@ -24,25 +24,18 @@ SOFTWARE.
 */
 
 
-#include <Arduino.h>
-#include <MotorMovement.h>
+#include "Arduino.h"
+#include "MotorMovement.h"
 
-MotorPair MotorMovement_h::MotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinReverse, unsigned char pinRightPower, unsigned char pinLeftPower)
+MotorPair MotorMovement_h::MotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinReverse)
 {
-	unsigned char _pinLeft, _pinRight, _pinReverse, _pinRightPower, _pinLeftPower;
-
 	_pinLeft = pinLeft;
 	_pinRight = pinRight;
 	_pinReverse = pinReverse;
-	_pinRightPower = pinRightPower;
-	_pinLeftPower = pinLeftPower;
 
 	pinMode(_pinLeft, OUTPUT);
 	pinMode(_pinRight, OUTPUT);
 	pinMode(_pinReverse, OUTPUT);
-	pinMode(_pinRightPower, OUTPUT);
-	pinMode(_pinLeftPower, OUTPUT);
-
 }
 void MotorPair::stop()
 {
@@ -50,42 +43,30 @@ void MotorPair::stop()
 	digitalWrite(_pinLeft , LOW);
 	digitalWrite(_pinRight, LOW);
 	digitalWrite(_pinReverse, LOW);
-
-	digitalWrite(_pinRightPower, LOW);
-	digitalWrite(_pinLeftPower, LOW);
 }
 
 void MotorPair::turnLeft(unsigned char rightPower)
 {
 	//code to turn left
 	digitalWrite(_pinLeft , LOW);
-	digitalWrite(_pinRight, HIGH);
+	digitalWrite(_pinRight, rightPower);
 	digitalWrite(_pinReverse, LOW);
-
-	digitalWrite(_pinRightPower, rightPower);
-	digitalWrite(_pinLeftPower, LOW);
 }
 
 void MotorPair::turnRight(unsigned char leftPower)
 {
 	//code to turn right
-	digitalWrite(_pinLeft, HIGH);
+	digitalWrite(_pinLeft, leftPower);
 	digitalWrite(_pinRight, LOW);
 	digitalWrite(_pinReverse, LOW);
-
-	digitalWrite(_pinRightPower, LOW);
-	digitalWrite(_pinLeftPower, leftPower);
 }
 
 void MotorPair::driveForward(unsigned char power)
 {
 	//code to drive forwards
-	digitalWrite(_pinLeft , HIGH);
-	digitalWrite(_pinRight, HIGH);
+	digitalWrite(_pinLeft , power);
+	digitalWrite(_pinRight, power);
 	digitalWrite(_pinReverse, LOW);
-
-	digitalWrite(_pinRightPower, power);
-	digitalWrite(_pinLeftPower, power);
 }
 
 void MotorPair::driveBackward(unsigned char power)
@@ -93,29 +74,25 @@ void MotorPair::driveBackward(unsigned char power)
 	//code to drive backwards
 	digitalWrite(_pinLeft, LOW);
 	digitalWrite(_pinRight, LOW);
-	digitalWrite(_pinReverse, HIGH);
-
-	digitalWrite(_pinRightPower, power);
-	digitalWrite(_pinLeftPower, power);
+	digitalWrite(_pinReverse, power);
 }
 
-AsymmetricMotorPair MotorMovement_h::AsymmetricMotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinLeftReverse, unsigned char pinRightReverse, unsigned char pinRightPower, unsigned char pinLeftPower)
+AsymmetricMotorPair MotorMovement_h::AsymmetricMotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinLeftReverse, unsigned char pinRightReverse)
 {
-	unsigned char _pinLeft, _pinRight, _pinLeftReverse, _pinRightReverse, _pinRightPower, _pinLeftPower;
-
 	_pinLeft = pinLeft;
 	_pinRight = pinRight;
 	_pinLeftReverse = pinLeftReverse;
 	_pinRightReverse = pinRightReverse;
-	_pinRightPower = pinRightPower;
-	_pinLeftPower = pinLeftPower;
 
 	pinMode(_pinLeft, OUTPUT);
 	pinMode(_pinRight, OUTPUT);
 	pinMode(_pinLeftReverse, OUTPUT);
 	pinMode(_pinRightReverse, OUTPUT);
-	pinMode(_pinRightPower, OUTPUT);
-	pinMode(_pinLeftPower, OUTPUT);
+
+	digitalWrite(_pinLeft, LOW);
+	digitalWrite(_pinRight, LOW);
+	digitalWrite(_pinRightReverse, LOW);
+	digitalWrite(_pinLeftReverse, LOW);
 }
 
 void AsymmetricMotorPair::stop()
@@ -125,78 +102,57 @@ void AsymmetricMotorPair::stop()
 	digitalWrite(_pinRight, LOW);
 	digitalWrite(_pinRightReverse, LOW);
 	digitalWrite(_pinLeftReverse, LOW);
-
-	digitalWrite(_pinRightPower, LOW);
-	digitalWrite(_pinLeftPower, LOW);
 }
 
 void AsymmetricMotorPair::turnLeft(unsigned char rightPower)
 {
 	//power to the right motor will turn left
 	digitalWrite(_pinLeft, LOW);
-	digitalWrite(_pinRight, HIGH);
+	digitalWrite(_pinRight, rightPower);
 	digitalWrite(_pinRightReverse, LOW);
 	digitalWrite(_pinLeftReverse, LOW);
-
-	digitalWrite(_pinRightPower, rightPower);
-	digitalWrite(_pinLeftPower, LOW);
 }
 
 void AsymmetricMotorPair::turnRight(unsigned char leftPower)
 {
 	//power to the left motor will turn right
-	digitalWrite(_pinLeft, HIGH);
+	digitalWrite(_pinLeft, leftPower);
 	digitalWrite(_pinRight, LOW);
 	digitalWrite(_pinRightReverse, LOW);
 	digitalWrite(_pinLeftReverse, LOW);
-
-	digitalWrite(_pinRightPower, LOW);
-	digitalWrite(_pinLeftPower, leftPower);
 }
 
 void AsymmetricMotorPair::turnLeftOnPoint(unsigned char leftPower, unsigned char rightPower)
 {
-	//power to reverseLeft and right will make the car turn on a pounsigned char
+	//power to reverseLeft and right will make the car turn on a point
 	digitalWrite(_pinLeft, LOW);
-	digitalWrite(_pinRight, HIGH);
+	digitalWrite(_pinRight, rightPower);
 	digitalWrite(_pinRightReverse, LOW);
-	digitalWrite(_pinLeftReverse, HIGH);
-
-	digitalWrite(_pinRightPower, rightPower);
-	digitalWrite(_pinLeftPower, leftPower);
+	digitalWrite(_pinLeftReverse, leftPower);
 }
 
 void AsymmetricMotorPair::turnRightOnPoint(unsigned char leftPower, unsigned char rightPower)
 {
-	//power to reverseRight and left will make the car turn on a pounsigned char
-	digitalWrite(_pinLeft, HIGH);
+	//power to reverseRight and left will make the car turn on a point
+	digitalWrite(_pinLeft, leftPower);
 	digitalWrite(_pinRight, LOW);
-	digitalWrite(_pinRightReverse, HIGH);
+	digitalWrite(_pinRightReverse, rightPower);
 	digitalWrite(_pinLeftReverse, LOW);
-
-	digitalWrite(_pinRightPower, rightPower);
-	digitalWrite(_pinLeftPower, leftPower);
 }
 
 void AsymmetricMotorPair::driveForward(unsigned char leftPower, unsigned char rightPower)
 {
 	//code to drive forwards
-	digitalWrite(_pinLeft, HIGH);
-	digitalWrite(_pinRight, HIGH);
+	digitalWrite(_pinLeft, leftPower);
+	digitalWrite(_pinRight, rightPower);
 	digitalWrite(_pinRightReverse, LOW);
 	digitalWrite(_pinLeftReverse, LOW);
-
-	digitalWrite(_pinRightPower, rightPower);
-	digitalWrite(_pinLeftPower, leftPower);
 }
 
 void AsymmetricMotorPair::driveBackward(unsigned char leftPower, unsigned char rightPower)
 {
 	digitalWrite(_pinLeft, LOW);
 	digitalWrite(_pinRight, LOW);
-	digitalWrite(_pinRightReverse, HIGH);
-	digitalWrite(_pinLeftReverse, HIGH);
-
-	digitalWrite(_pinRightPower, rightPower);
-	digitalWrite(_pinLeftPower, leftPower);
+	digitalWrite(_pinRightReverse, rightPower);
+	digitalWrite(_pinLeftReverse, leftPower);
 }

@@ -27,25 +27,25 @@ SOFTWARE.
 #ifndef MotorMovement_h
 #define MotorMovement_h
 
-#include <Arduino.h>;
+#include "Arduino.h";
 
 class MotorPair
 {
 public:
-	MotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinReverse, unsigned char pinRightPower, unsigned char pinLeftPower);
+	MotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinReverse);
 	void stop();
 	void turnLeft(unsigned char rightPower);
 	void turnRight(unsigned char leftPower);
 	void driveForward(unsigned char power);
 	void driveBackward(unsigned char power);
 private:
-	unsigned char _pinLeft, _pinRight, _pinReverse, _pinRightPower, _pinLeftPower;
+	unsigned char _pinLeft, _pinRight, _pinReverse;
 };
 
 class AsymmetricMotorPair
 {
 public:
-	AsymmetricMotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinLeftReverse, unsigned char pinRightReverse, unsigned char pinRightPower, unsigned char pinLeftPower);
+	AsymmetricMotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinLeftReverse, unsigned char pinRightReverse);
 	void stop();
 	void turnLeft(unsigned char rightPower);
 	void turnRight(unsigned char leftPower);
@@ -54,7 +54,7 @@ public:
 	void driveForward(unsigned char leftPower, unsigned char rightPower);
 	void driveBackward(unsigned char leftPower, unsigned char rightPower);
 private:
-	unsigned char _pinLeft, _pinRight, _pinLeftReverse, _pinRightReverse, _pinRightPower, _pinLeftPower;
+	unsigned char _pinLeft, _pinRight, _pinLeftReverse, _pinRightReverse;
 };
 
 typedef enum command {

@@ -37,9 +37,6 @@ SOFTWARE.
 #define    MeasureValue        0x04          // Value to initiate ranging.
 #define    RegisterHighLowB    0x8f          // Register to get both High and Low bytes in 1 call.
 
-unsigned char _LASER_TRIGGER_PIN, _LASER_MONITOR_PIN, _LASER_PE_LINE;
-unsigned long _pulseWidth;
-
 //PWMLaser constructor
 PWMLaser LaserSupport_h::PWMLaser(unsigned char LASER_TRIGGER_PIN, unsigned char LASER_MONITOR_PIN, unsigned char LASER_PE_LINE)
 {
