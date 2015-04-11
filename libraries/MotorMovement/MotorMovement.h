@@ -32,14 +32,14 @@ SOFTWARE.
 class MotorPair
 {
 public:
-	MotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinReverse);
+	MotorPair(unsigned char pinLeft, unsigned char pinRight, unsigned char pinReverse, unsigned char pinRightPower, unsigned char pinLeftPower);
 	void stop();
 	void turnLeft(unsigned char rightPower);
 	void turnRight(unsigned char leftPower);
 	void driveForward(unsigned char power);
 	void driveBackward(unsigned char power);
 private:
-	unsigned char _pinLeft, _pinRight, _pinReverse;
+	unsigned char _pinLeft, _pinRight, _pinReverse, _pinRightPower, _pinLeftPower;
 };
 
 class AsymmetricMotorPair
