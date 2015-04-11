@@ -1,0 +1,33 @@
+####################################
+# Syntax colouring for MotorMovement
+####################################
+
+####################################
+# Datatypes (KEYWORD1)
+####################################
+MotorPair 		KEYWORD1
+AsymmetricMotorPair	KEYWORD1
+command			KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+driveForward 		KEYWORD2
+driveBackward 		KEYWORD2
+turnLeft 		KEYWORD2
+turnRight 		KEYWORD2
+turnLeftOnPoint 	KEYWORD2
+turnRightOnPoint 	KEYWORD2
+stop 			KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+DRIVEFORWARDS 	LITERAL1
+DRIVEBACKWARDS 	LITERAL1
+TURNLEFT 	LITERAL1
+TURNRIGHT 	LITERAL1
+ROTATERIGHT	LITERAL1
+ROTATELEFT 	LITERAL1
+STOP 		LITERAL1
