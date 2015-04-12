@@ -43,7 +43,7 @@ private:
 class I2CLaser
 {
 public:
-	I2CLaser();
+	I2CLaser(unsigned int timeout);
 	unsigned short getLaserDistance();
 
 };
